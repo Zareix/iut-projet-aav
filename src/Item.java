@@ -18,4 +18,8 @@ public class Item {
 		return valeur;
 	}
 	
+	@Override
+	public String toString() {
+		return nom +" | "+ valeur +" | "+poids ;
+	}
 }

@@ -7,11 +7,11 @@ public class SacADos {
 	ArrayList<Item> contenu;
 	ArrayList<Item> listeObjets;
 	float poidsMaximal;
-	
+
 	public SacADos() {
 		contenu = new ArrayList<Item>();
 	}
-	
+
 	public SacADos(String chemin, float poidsMaximal) {
 		contenu = new ArrayList<Item>();
 		listeObjets = new ArrayList<Item>();
@@ -19,43 +19,46 @@ public class SacADos {
 		this.poidsMaximal = poidsMaximal;
 
 	}
-	
-	private static void readItems(String chemin) {
+
+	private void readItems(String chemin) {
 		try {
 			Scanner file = new Scanner(new FileInputStream(chemin));
-			while (file.hasNextLine()){
+			while (file.hasNextLine()) {
 				Scanner scLine = new Scanner(file.nextLine());
-				String line ="";
-				String name="";float poids;float valeur;
-				line = scLine.nextLine();
-				
-				for(int i=0; i< line.length();++i) {
-					if (line[i] ==';') {
-						
-					}
-				}
-				
-				
-				Item it = new Item();
-				
+				String line[] = scLine.nextLine().split(" ; ");
+				listeObjets.add(new Item(line[0], Float.valueOf(line[1]), Float.valueOf(line[2])));
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
+
 	}
-	
-	
-	
+
 	@Override
 	public String toString() {
-		// TODO Stub de la m�thode g�n�r� automatiquement
-		return super.toString();
+		return contenu.toString() + " " + poidsActuel() + valeurActuel();
+	}
+
+	private float valeurActuel() {
+		float v = 0;
+		for (Item item : contenu)
+			v += item.getValeur();
+		return v;
+	}
+
+	private float poidsActuel() {
+		float p = 0;
+		for (Item item : contenu)
+			p += item.getPoids();
+		return p ;
+	}
+
+	public void resoudre() {
+		// TODO
 	}
 	
-	public void resoudre() {
-		//TODO
+	public static void main(String[] args) {
+		SacADos sac = new SacADos("Items.txt", 10);
+		System.out.println(sac.listeObjets.toString());
 	}
 }
