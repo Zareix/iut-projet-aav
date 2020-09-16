@@ -1,14 +1,14 @@
-package Principal;
+package principal;
 
-public class Item implements Comparable<Item> {
+public class Item {
 	private String nom;
-	private float valeur;
 	private float poids;
+	private float valeur;
 
 	public Item(String n, float p, float v) {
 		this.nom = n;
-		this.valeur = v;
 		this.poids = p;
+		this.valeur = v;
 	}
 
 	public float getPoids() {
@@ -22,10 +22,5 @@ public class Item implements Comparable<Item> {
 	@Override
 	public String toString() {
 		return nom + " | " + poids + " | " + valeur;
-	}
-
-	@Override
-	public int compareTo(Item o) {
-		return (int) (((this.valeur / this.poids) - (o.valeur / o.poids)) * 1000);
 	}
 }
