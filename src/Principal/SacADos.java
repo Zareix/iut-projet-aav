@@ -1,3 +1,4 @@
+package Principal;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -18,6 +19,14 @@ public class SacADos {
 		readItems(chemin);
 		this.poidsMaximal = poidsMaximal;
 
+	}
+	
+	public float getPoidsMaximal() {
+		return poidsMaximal;
+	}
+	
+	public ArrayList<Item> getContenu() {
+		return contenu;
 	}
 
 	private void readItems(String chemin) {
@@ -46,7 +55,7 @@ public class SacADos {
 		return v;
 	}
 
-	private float poidsActuel() {
+	public float poidsActuel() {
 		float p = 0;
 		for (Item item : contenu)
 			p += item.getPoids();
@@ -55,6 +64,14 @@ public class SacADos {
 
 	public void resoudre() {
 		// TODO
+	}
+	
+	public void addItemSac(Item it) {
+		contenu.add(it);
+	}
+	
+	public ArrayList<Item> getListeObjets() {
+		return new ArrayList<>(listeObjets);
 	}
 	
 	public static void main(String[] args) {
