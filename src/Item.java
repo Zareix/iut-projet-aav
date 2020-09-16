@@ -1,9 +1,11 @@
 
 public class Item {
+	private String nom;
 	private float valeur;
 	private float poids;
 	
-	public Item(float v, float p) {
+	public Item(String n,float v, float p) {
+		this.nom = n;
 		this.valeur = v;
 		this.poids = p;
 	}
