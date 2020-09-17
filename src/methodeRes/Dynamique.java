@@ -15,6 +15,16 @@ public class Dynamique {
 				matrice[0][j] = 0;
 			else
 				matrice[0][j] = items.get(0).getValeur();
+			
+			for (int i = 1 ; i <matrice.length ; ++i) {
+				if (items.get(i).getPoids() > j) 
+					matrice[i][j] = matrice[i-1][j];
+				else
+					matrice[i][j] = Math.max(matrice[i-1][j],  matrice[i-1][(int) (j- items.get(i).getPoids())] + items.get(i).getValeur() );
+				
+			}
 		}
+		
+		
 	}
 }
