@@ -8,46 +8,41 @@ import principal.SacADos;
 public class Dynamique {
 	public static void dynamiqueRes(SacADos sac) {
 		ArrayList<Item> items = sac.getListeObjets();
-		float[][] matrice = new float[items.size()][(int) sac.getPoidsMaximal() + 1];
+		float[][] matrice = new float[items.size()][(int) sac.getPoidsMaximal() * 10 + 1];
 
-		int j = 0;
-		
-		while(j < sac.getPoidsMaximal()) {
-			if (items.get(0).getPoids() > j)
+		for (int j = 0; j <= sac.getPoidsMaximal() * 10; j++) {
+			if (items.get(0).getPoids() * 10 > j)
 				matrice[0][j] = 0;
 			else
-				matrice[0][j] = items.get(0).getValeur();
-			j++;
+				matrice[0][j] = (int) items.get(0).getValeur() * 10;
+		}
 
-			int  i = 0;
-			while(i < matrice.length) {
-				if (items.get(i).getPoids() > j)
+		for (int i = 1; i < items.size(); i++) {
+			for (int j = 0; j <= sac.getPoidsMaximal() * 10; j++) {
+				if (items.get(i).getPoids() * 10 > j)
 					matrice[i][j] = matrice[i - 1][j];
 				else
-					matrice[i][j] = Math.max(matrice[i - 1][j],
-							matrice[i - 1][(int) (j - items.get(i).getPoids())] + items.get(i).getValeur());
-				
-				while(matrice[i][j] == matrice[i][j - 1])
-					j--;
-				
-				while(j > 0) {
-					while(i > 0 && matrice[i][j] == matrice[i - 1][j])
-						i--;
-					j = j - (int) items.get(i).getPoids();
-					if (j > 0)
-						sac.addItemSac(items.get(i));
-					i--;
-				}
+					matrice[i][j] = (int) (Math.max(matrice[i - 1][j],
+							matrice[i - 1][(int) (j - (items.get(i).getPoids() * 10))]
+									+ items.get(i).getValeur() * 10));
 			}
 		}
 
-	}
-	
-	public static void main(String[] args) {
-		SacADos sac = new SacADos("items.txt", 5);
-		dynamiqueRes(sac);
-		
-		System.out.println(sac.getContenu());
-		
+		int i = items.size() - 1;
+		int j = (int) (sac.getPoidsMaximal() * 10);
+		while (matrice[i][j] == matrice[i][j - 1])
+			--j;
+
+		while (j > 0) {
+			while (i > 0 && matrice[i][(int) j] == matrice[i - 1][(int) j]) {
+				--i;
+			}
+
+			j = j - (int) (items.get(i).getPoids() * 10);
+			if (j >= 0) {
+				sac.addItemSac(items.get(i));
+			}
+			--i;
+		}
 	}
 }
