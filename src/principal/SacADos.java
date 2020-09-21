@@ -5,13 +5,14 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import methodeRes.Dynamique;
+import methodeRes.Glouton;
+
 public class SacADos {
-	private ArrayList<Item> contenu;
 	private ArrayList<Item> listeObjetsPossibles;
 	private float poidsMaximal;
 
 	public SacADos() {
-		this.contenu = new ArrayList<Item>();
 	}
 
 	public SacADos(String chemin, float poidsMaximal) {
@@ -39,39 +40,53 @@ public class SacADos {
 		return poidsMaximal;
 	}
 
-	public ArrayList<Item> getContenu() {
-		return new ArrayList<>(contenu);
-	}
-
 	public ArrayList<Item> getListeObjets() {
 		return new ArrayList<>(listeObjetsPossibles);
 	}
 
 	public float valeurActuel() {
 		float v = 0;
-		for (Item item : contenu)
-			v += item.getValeur();
+		for (Item item : listeObjetsPossibles)
+			if (item.getStocké())
+				v += item.getValeur();
 		return v;
 	}
 
 	public float poidsActuel() {
 		float p = 0;
-		for (Item item : contenu)
-			p += item.getPoids();
+		for (Item item : listeObjetsPossibles)
+			if (item.getStocké())
+				p += item.getPoids();
 		return p;
 	}
 
 	public void addItemSac(Item item) {
-		contenu.add(item);
+		item.setStocké(true);
 	}
 
-	public void resoudre() {
-		// TODO
+	public void resoudre(String methode) {
+		switch (methode) {
+		case "glouton":
+			Glouton.gloutonRes(this);
+			break;
+		case "dynamique":
+			Dynamique.dynamiqueRes(this);
+			break;
+		case "pse":
+			break;
+		default:
+			throw new IllegalArgumentException(methode + " n'est pas une méthode de resolution définie.");
+		}
 	}
 
 	@Override
 	public String toString() {
-		return "Contenu du sac : " + contenu.toString() + "\n" + "Poids du sac : " + poidsActuel()
-				+ " / Valeur du sac : " + valeurActuel();
+		String contenu = "";
+		for (Item item : listeObjetsPossibles)
+			if (item.getStocké())
+				contenu += item.toString() + ", ";
+
+		return "Contenu du sac : " + contenu + "\n" + "Poids du sac : " + poidsActuel() + " / Valeur du sac : "
+				+ valeurActuel();
 	}
 }

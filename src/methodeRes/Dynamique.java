@@ -34,14 +34,11 @@ public class Dynamique {
 			--j;
 
 		while (j > 0) {
-			while (i > 0 && matrice[i][(int) j] == matrice[i - 1][(int) j]) {
+			while (i > 0 && matrice[i][(int) j] == matrice[i - 1][(int) j])
 				--i;
-			}
-
 			j = j - (int) (items.get(i).getPoids() * 10);
-			if (j >= 0) {
+			if (j >= 0)
 				sac.addItemSac(items.get(i));
-			}
 			--i;
 		}
 	}
