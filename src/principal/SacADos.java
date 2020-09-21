@@ -15,14 +15,14 @@ public class SacADos {
 	public SacADos() {
 	}
 
-	public SacADos(String chemin, float poidsMaximal) {
+	public SacADos(String chemin, float poidsMaximal) throws Exception {
 		this();
 		this.listeObjetsPossibles = new ArrayList<Item>();
 		readItems(chemin);
 		this.poidsMaximal = poidsMaximal;
 	}
 
-	private void readItems(String chemin) {
+	private void readItems(String chemin) throws Exception {
 		try {
 			Scanner file = new Scanner(new FileInputStream(chemin));
 			while (file.hasNextLine()) {
@@ -31,7 +31,7 @@ public class SacADos {
 				listeObjetsPossibles.add(new Item(line[0], Float.valueOf(line[1]), Float.valueOf(line[2])));
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			throw new FileNotFoundException("Impossible de trouver le fichier " + chemin);
 		}
 
 	}
@@ -84,7 +84,7 @@ public class SacADos {
 		String contenu = "";
 		for (Item item : listeObjetsPossibles)
 			if (item.getStocké())
-				contenu += item.toString() + ", ";
+				contenu += item.toString() + " | ";
 
 		return "Contenu du sac : " + contenu + "\n" + "Poids du sac : " + poidsActuel() + " / Valeur du sac : "
 				+ valeurActuel();

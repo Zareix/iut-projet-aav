@@ -31,6 +31,6 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return nom + " | " + poids + " | " + valeur;
+		return nom + ", " + poids + ", " + valeur;
 	}
 }
