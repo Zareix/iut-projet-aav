@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import methodeRes.Dynamique;
 import methodeRes.Glouton;
+import methodeRes.Pse;
 
 public class SacADos {
 	private ArrayList<Item> listeObjetsPossibles;
@@ -73,6 +74,7 @@ public class SacADos {
 			Dynamique.dynamiqueRes(this);
 			break;
 		case "pse":
+			Pse.PseRes(this);
 			break;
 		default:
 			throw new IllegalArgumentException(methode + " n'est pas une méthode de resolution définie.");

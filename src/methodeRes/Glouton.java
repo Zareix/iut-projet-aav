@@ -10,6 +10,12 @@ import principal.SacADos;
 public class Glouton {
 	public static void gloutonRes(SacADos sac) {
 		List<Item> items = sac.getListeObjets();
+
+		/*
+		 * Le tri dans l'ordre décroissant selon le rapport v/p n'est utile que pour
+		 * cette méthode. On a donc décidé d'utiliser un Comparator et la méthode Sort
+		 * plutôt qu'override "compare" dans la classe Item directement
+		 */
 		Collections.sort(items, new Comparator<Item>() {
 			@Override
 			public int compare(Item o1, Item o2) {
