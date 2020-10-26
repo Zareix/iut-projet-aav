@@ -14,7 +14,8 @@ public class Glouton {
 		/*
 		 * Le tri dans l'ordre décroissant selon le rapport v/p n'est utile que pour
 		 * cette méthode. On a donc décidé d'utiliser un Comparator et la méthode Sort
-		 * plutôt qu'override "compare" dans la classe Item directement
+		 * plutôt qu'override "compare" dans la classe Item directement ou de coder un
+		 * quicksort
 		 */
 		Collections.sort(items, new Comparator<Item>() {
 			@Override

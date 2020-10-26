@@ -23,6 +23,9 @@ public class SacADos {
 		this.poidsMaximal = poidsMaximal;
 	}
 
+	/*
+	 * Lit la liste des Objets depuis un fichier texte donné en paramètres
+	 */
 	private void readItems(String chemin) throws Exception {
 		try {
 			Scanner file = new Scanner(new FileInputStream(chemin));
@@ -37,14 +40,23 @@ public class SacADos {
 
 	}
 
+	/*
+	 * Retourne le poids maximal du sac
+	 */
 	public float getPoidsMaximal() {
 		return poidsMaximal;
 	}
 
+	/*
+	 * Retourne une copie des la liste des objets possibles
+	 */
 	public ArrayList<Item> getListeObjets() {
-		return new ArrayList<>(listeObjetsPossibles);
+		return new ArrayList<Item>(listeObjetsPossibles);
 	}
 
+	/*
+	 * Retourne la valeur totale des objets dans le sac
+	 */
 	public float valeurActuel() {
 		float v = 0;
 		for (Item item : listeObjetsPossibles)
@@ -53,6 +65,9 @@ public class SacADos {
 		return v;
 	}
 
+	/*
+	 * Retourne le poids totale des objets dans le sac
+	 */
 	public float poidsActuel() {
 		float p = 0;
 		for (Item item : listeObjetsPossibles)
@@ -61,6 +76,9 @@ public class SacADos {
 		return p;
 	}
 
+	/*
+	 * Ajoute un item dans le sac
+	 */
 	public void addItemSac(Item item) {
 		item.setStocké(true);
 	}
@@ -77,7 +95,7 @@ public class SacADos {
 			Pse.PseRes(this);
 			break;
 		default:
-			throw new IllegalArgumentException(methode + " n'est pas une méthode de resolution définie.");
+			throw new IllegalArgumentException(methode + " n'est pas une méthode de résolution définie.");
 		}
 	}
 

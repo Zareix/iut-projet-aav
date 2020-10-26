@@ -33,7 +33,7 @@ public class Dynamique {
 		int i = items.size() - 1;
 		int j = (int) (sac.getPoidsMaximal() * 10);
 		/*
-		 * on récupère dans la dernière ligne le poids minimal nécessaire pour faire le
+		 * On récupère dans la dernière ligne le poids minimal nécessaire pour faire le
 		 * bénéfice optimal
 		 */
 		while (matrice[i][j] == matrice[i][j - 1])
