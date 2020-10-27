@@ -13,8 +13,7 @@ public class SacADos {
 	private ArrayList<Item> listeObjetsPossibles;
 	private float poidsMaximal;
 
-	public SacADos() {
-	}
+	public SacADos() {}
 
 	public SacADos(String chemin, float poidsMaximal) throws Exception {
 		this();

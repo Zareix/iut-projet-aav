@@ -55,9 +55,8 @@ public class ABR {
 	private void calcBorneSupérieure(ArrayList<Item> liste) {
 		float res = 0;
 		res += valeurListe(); // Ajoute la valeur actuelle du noeud
-		for (int i = this.profondeur; i < liste.size(); i++) {
+		for (int i = this.profondeur; i < liste.size(); i++)
 			res += liste.get(i).getValeur(); // Ajoute la valeur des objets restants
-		}
 		this.borneSupérieure = res;
 	}
 
