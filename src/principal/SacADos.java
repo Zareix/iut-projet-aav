@@ -2,6 +2,7 @@ package principal;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,7 +25,7 @@ public class SacADos {
 	}
 
 	/*
-	 * Lit la liste des Objets depuis un fichier texte donné en paramètres
+	 * Lit la liste des objets depuis un fichier texte donné en paramètre
 	 */
 	private void readItems(String chemin) throws Exception {
 		try {
@@ -107,7 +108,8 @@ public class SacADos {
 				contenu.append(item.toString() + " | ");
 		contenu.deleteCharAt(contenu.lastIndexOf("|"));
 
-		return "Contenu du sac : " + contenu + System.lineSeparator() + "Poids du sac : " + poidsActuel()
-				+ System.lineSeparator() + "Valeur du sac : " + valeurActuel();
+		DecimalFormat df = new DecimalFormat("#.##"); // Permet de formater l'affichage des floats
+		return "Contenu du sac : " + contenu + System.lineSeparator() + "Poids du sac : " + df.format(poidsActuel())
+				+ System.lineSeparator() + "Valeur du sac : " + df.format(valeurActuel());
 	}
 }

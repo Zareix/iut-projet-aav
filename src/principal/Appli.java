@@ -6,13 +6,13 @@ public class Appli {
 	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Entrer le chemin du fichier d'items : ");
+		System.out.println("Entrez le chemin du fichier d'items : ");
 		String chemin = sc.nextLine();
 
-		System.out.println("Entrer le poids maximal du sac : ");
+		System.out.println("Entrez le poids maximal du sac : ");
 		float poidsMax = Float.parseFloat(sc.nextLine());
 
-		System.out.println("Entrer la méthode de résolution ('glouton', 'dynamique' ou 'pse') :");
+		System.out.println("Choisissez la méthode de résolution ('glouton', 'dynamique' ou 'pse') :");
 		String methode = sc.nextLine();
 
 		sc.close();
