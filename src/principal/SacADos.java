@@ -13,7 +13,8 @@ public class SacADos {
 	private ArrayList<Item> listeObjetsPossibles;
 	private float poidsMaximal;
 
-	public SacADos() {}
+	public SacADos() {
+	}
 
 	public SacADos(String chemin, float poidsMaximal) throws Exception {
 		this();
@@ -91,7 +92,7 @@ public class SacADos {
 			Dynamique.dynamiqueRes(this);
 			break;
 		case "pse":
-			Pse.PseRes(this);
+			Pse.pseRes(this);
 			break;
 		default:
 			throw new IllegalArgumentException(methode + " n'est pas une méthode de résolution définie.");
@@ -100,12 +101,13 @@ public class SacADos {
 
 	@Override
 	public String toString() {
-		String contenu = "";
+		StringBuilder contenu = new StringBuilder();
 		for (Item item : listeObjetsPossibles)
 			if (item.getStocké())
-				contenu += item.toString() + " | ";
+				contenu.append(item.toString() + " | ");
+		contenu.deleteCharAt(contenu.lastIndexOf("|"));
 
-		return "Contenu du sac : " + contenu + "\n" + "Poids du sac : " + poidsActuel() + " / Valeur du sac : "
-				+ valeurActuel();
+		return "Contenu du sac : " + contenu + System.lineSeparator() + "Poids du sac : " + poidsActuel()
+				+ System.lineSeparator() + "Valeur du sac : " + valeurActuel();
 	}
 }

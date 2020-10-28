@@ -29,8 +29,11 @@ public class Item {
 		this.stocké = stocké;
 	}
 
-	@Override
-	public String toString() {
+	public String toStringFull() {
 		return nom + ", " + poids + ", " + valeur;
 	}
+
+	public String toString() {
+		return nom;
+	};
 }

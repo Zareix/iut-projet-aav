@@ -11,19 +11,18 @@ public class Appli {
 
 		System.out.println("Entrer le poids maximal du sac : ");
 		float poidsMax = Float.parseFloat(sc.nextLine());
-		//float poidsMax = sc.nextFloat();
 
 		System.out.println("Entrer la méthode de résolution ('glouton', 'dynamique' ou 'pse') :");
 		String methode = sc.nextLine();
 
 		sc.close();
-		
-		System.out.println("Chemin : " + chemin + System.lineSeparator() + "Poids Max : " + poidsMax
-				+ System.lineSeparator() + "Méthode : " + methode);
-		
+
+		System.out.println(System.lineSeparator() + "Chemin : " + chemin + System.lineSeparator() + "Poids Max : "
+				+ poidsMax + System.lineSeparator() + "Méthode : " + methode);
+
 		SacADos sac = new SacADos(chemin, poidsMax);
 		sac.resoudre(methode);
 
-		System.out.println(System.lineSeparator() + sac);
+		System.out.println(System.lineSeparator() + "Résultat de la résolution" + System.lineSeparator() + sac);
 	}
 }
