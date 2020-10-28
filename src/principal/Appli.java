@@ -1,11 +1,29 @@
 package principal;
 
+import java.util.Scanner;
+
 public class Appli {
 	public static void main(String[] args) throws Exception {
-		SacADos sac = new SacADos("items.txt", (float) 1.3);
+		Scanner sc = new Scanner(System.in);
 
-		sac.resoudre("dynamique");
+		System.out.println("Entrer le chemin du fichier d'items : ");
+		String chemin = sc.nextLine();
 
-		System.out.println(sac);
+		System.out.println("Entrer le poids maximal du sac : ");
+		float poidsMax = Float.parseFloat(sc.nextLine());
+		//float poidsMax = sc.nextFloat();
+
+		System.out.println("Entrer la méthode de résolution ('glouton', 'dynamique' ou 'pse') :");
+		String methode = sc.nextLine();
+
+		sc.close();
+		
+		System.out.println("Chemin : " + chemin + System.lineSeparator() + "Poids Max : " + poidsMax
+				+ System.lineSeparator() + "Méthode : " + methode);
+		
+		SacADos sac = new SacADos(chemin, poidsMax);
+		sac.resoudre(methode);
+
+		System.out.println(System.lineSeparator() + sac);
 	}
 }
