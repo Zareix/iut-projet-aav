@@ -10,29 +10,40 @@ public class ABR {
 
 	private static float borneInférieure;
 	private float borneSupérieure;
-	
+
 	private static ArrayList<Item> solution;
 
-	public ABR(ArrayList<Item> listeObjetsPossibles, float poidsMaximal, ArrayList<Item> listeItems, int i) {
-		if (i <= listeObjetsPossibles.size()) {
+	/**
+	 * @param listeObjetsPossibles
+	 * @param poidsMaximal
+	 * @param listeItems
+	 * @param profondeur
+	 */
+	public ABR(ArrayList<Item> listeObjetsPossibles, float poidsMaximal, ArrayList<Item> listeItems, int profondeur) {
+		if (profondeur <= listeObjetsPossibles.size()) {
 			this.value = new ArrayList<>(listeItems);
-			this.profondeur = i;
+			this.profondeur = profondeur;
 
 			calcBorneInférieure();
 			calcBorneSupérieure(listeObjetsPossibles);
 
-			if (i != listeObjetsPossibles.size()) {
-				this.leftTree = new ABR(listeObjetsPossibles, poidsMaximal, new ArrayList<>(listeItems), i + 1);
+			if (profondeur != listeObjetsPossibles.size()) {
+				this.leftTree = new ABR(listeObjetsPossibles, poidsMaximal, new ArrayList<>(listeItems),
+						profondeur + 1);
 
-				listeItems.add(listeObjetsPossibles.get(i));
-				if (poidsListe(listeItems) <= poidsMaximal)
-					this.rightTree = new ABR(listeObjetsPossibles, poidsMaximal, new ArrayList<>(listeItems), i + 1);
+				listeItems.add(listeObjetsPossibles.get(profondeur));
+				if (poidsListe(listeItems) <= poidsMaximal && this.borneSupérieure > ABR.borneInférieure)
+					this.rightTree = new ABR(listeObjetsPossibles, poidsMaximal, new ArrayList<>(listeItems),
+							profondeur + 1);
 			}
 		}
 	}
 
-	/*
-	 * Retourne le poids d'une liste d'Item donnée en paramètre
+	/**
+	 * Retourne le poids d'une liste d'items donnée en paramètre
+	 * 
+	 * @param liste
+	 * @return poids de la liste
 	 */
 	private float poidsListe(ArrayList<Item> liste) {
 		float res = 0;
@@ -41,52 +52,64 @@ public class ABR {
 		return res;
 	}
 
-	/*
+	/**
 	 * Retourne la valeur du noeud
+	 * 
+	 * @return valeur du noeud
 	 */
-	private float valeurListe() {
+	private float valeurNoeud() {
 		float res = 0;
 		for (Item item : this.value)
 			res += item.getValeur();
 		return res;
 	}
 
-	/*
-	 * Calcule la borne supérieure d'un noeud
+	/**
+	 * Calcule la borne supérieure du noeud
+	 * 
+	 * @param listeObjetsPossibles
 	 */
-	private void calcBorneSupérieure(ArrayList<Item> liste) {
+	private void calcBorneSupérieure(ArrayList<Item> listeObjetsPossibles) {
 		float res = 0;
-		res += valeurListe(); // Ajoute la valeur actuelle du noeud
-		for (int i = this.profondeur; i < liste.size(); i++)
-			res += liste.get(i).getValeur(); // Ajoute la valeur des objets restants
+		res += valeurNoeud(); // Ajoute la valeur actuelle du noeud
+		for (int i = this.profondeur; i < listeObjetsPossibles.size(); i++)
+			res += listeObjetsPossibles.get(i).getValeur(); // Ajoute la valeur des objets restants
 		this.borneSupérieure = res;
 	}
 
+	/**
+	 * Met à jour la borne inférieure de l'arbre
+	 */
 	private void calcBorneInférieure() {
-		if(valeurListe() > ABR.borneInférieure)
-			ABR.borneInférieure = this.valeurListe();
+		if (valeurNoeud() > ABR.borneInférieure)
+			ABR.borneInférieure = this.valeurNoeud();
 	}
-	
-	public void calcMeilleurListe(){
-		if (this.valeurListe() == ABR.borneInférieure) {
+
+	/**
+	 * Met à jour la borne inférieure de l'arbre
+	 */
+	public void calcMeilleurListe() {
+		if (this.valeurNoeud() == ABR.borneInférieure)
 			ABR.solution = this.value;
-		} else {
-			if (this.leftTree == null && this.rightTree == null) {
+		else {
+			if (this.leftTree == null && this.rightTree == null)
 				return;
-			}
-			if (this.leftTree == null) {
+			if (this.leftTree == null)
 				this.rightTree.calcMeilleurListe();
-			}
-			if (this.rightTree == null) {
+			if (this.rightTree == null)
 				this.leftTree.calcMeilleurListe();
-			}
 			if (this.rightTree != null && this.leftTree != null) {
 				this.rightTree.calcMeilleurListe();
 				this.leftTree.calcMeilleurListe();
 			}
 		}
 	}
-	
+
+	/**
+	 * Retourne la solution
+	 * 
+	 * @return solution
+	 */
 	public static ArrayList<Item> getSolution() {
 		return new ArrayList<Item>(solution);
 	}

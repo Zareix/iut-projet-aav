@@ -6,8 +6,11 @@ import principal.Item;
 import principal.SacADos;
 
 public class Dynamique {
+	/**
+	 * @param sac : le sac à résoudre
+	 */
 	public static void dynamiqueRes(SacADos sac) {
-		float multiplicateur = 10; // TODO : A voir où le déclarer
+		float multiplicateur = 10;
 
 		ArrayList<Item> items = sac.getListeObjets();
 		float[][] matrice = new float[items.size()][(int) (sac.getPoidsMaximal() * multiplicateur + 1)];
@@ -26,9 +29,9 @@ public class Dynamique {
 				if (items.get(i).getPoids() * multiplicateur > j)
 					matrice[i][j] = matrice[i - 1][j];
 				else
-					matrice[i][j] = (int) (Math.max(matrice[i - 1][j],
+					matrice[i][j] = Math.max(matrice[i - 1][j],
 							matrice[i - 1][(int) (j - (items.get(i).getPoids() * multiplicateur))]
-									+ items.get(i).getValeur() * multiplicateur));
+									+ items.get(i).getValeur() * multiplicateur);
 			}
 		}
 
@@ -41,7 +44,7 @@ public class Dynamique {
 		while (matrice[i][j] == matrice[i][j - 1])
 			--j;
 
-		// On récupère les objets
+		// On récupère les objets et on les ajoute au sac
 		while (j > 0) {
 			while (i > 0 && matrice[i][j] == matrice[i - 1][j])
 				--i;

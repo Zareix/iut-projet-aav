@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Appli {
 	public static void main(String[] args) throws Exception {
+
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Entrez le chemin du fichier d'items : ");
@@ -21,8 +22,10 @@ public class Appli {
 				+ poidsMax + System.lineSeparator() + "Méthode : " + methode);
 
 		SacADos sac = new SacADos(chemin, poidsMax);
+
 		sac.resoudre(methode);
 
 		System.out.println(System.lineSeparator() + "Résultat de la résolution" + System.lineSeparator() + sac);
+
 	}
 }

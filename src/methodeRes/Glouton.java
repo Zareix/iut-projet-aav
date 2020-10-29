@@ -1,15 +1,18 @@
 package methodeRes;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 import principal.Item;
 import principal.SacADos;
 
 public class Glouton {
+	/**
+	 * @param sac : le sac à résoudre
+	 */
 	public static void gloutonRes(SacADos sac) {
-		List<Item> items = sac.getListeObjets();
+		ArrayList<Item> items = sac.getListeObjets();
 
 		Collections.sort(items, new Comparator<Item>() {
 			@Override
@@ -18,9 +21,8 @@ public class Glouton {
 			}
 		});
 
-		for (int i = 0; i < items.size(); i++) {
+		for (int i = 0; i < items.size(); i++)
 			if (sac.poidsActuel() + items.get(i).getPoids() < sac.getPoidsMaximal())
 				sac.addItemSac(items.get(i));
-		}
 	}
 }
