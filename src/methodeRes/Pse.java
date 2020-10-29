@@ -9,6 +9,11 @@ import principal.Item;
 public class Pse {
 	public static void pseRes(SacADos sac) {
 		ABR arbre = new ABR(sac.getListeObjets(), sac.getPoidsMaximal(), new ArrayList<Item>(), 0);
-		// System.out.println(arbre);
+		arbre.calcMeilleurListe();
+		ArrayList<Item> sol = ABR.getSolution();
+		
+		for (Item item : sol) {
+			sac.addItemSac(item);
+		}
 	}
 }

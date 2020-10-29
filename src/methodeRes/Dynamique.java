@@ -17,7 +17,7 @@ public class Dynamique {
 			if (items.get(0).getPoids() * multiplicateur > j)
 				matrice[0][j] = 0;
 			else
-				matrice[0][j] = (int) items.get(0).getValeur() * multiplicateur;
+				matrice[0][j] = items.get(0).getValeur() * multiplicateur;
 		}
 
 		// On remplit les autres lignes de la matrice
@@ -43,7 +43,7 @@ public class Dynamique {
 
 		// On récupère les objets
 		while (j > 0) {
-			while (i > 0 && matrice[i][(int) j] == matrice[i - 1][(int) j])
+			while (i > 0 && matrice[i][j] == matrice[i - 1][j])
 				--i;
 			j = j - (int) (items.get(i).getPoids() * multiplicateur);
 			if (j >= 0)

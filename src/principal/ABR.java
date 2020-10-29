@@ -8,8 +8,10 @@ public class ABR {
 	private ArrayList<Item> value;
 	private int profondeur;
 
-	private float borneInférieure; // Static ??
+	private static float borneInférieure;
 	private float borneSupérieure;
+	
+	private static ArrayList<Item> solution;
 
 	public ABR(ArrayList<Item> listeObjetsPossibles, float poidsMaximal, ArrayList<Item> listeItems, int i) {
 		if (i <= listeObjetsPossibles.size()) {
@@ -61,7 +63,32 @@ public class ABR {
 	}
 
 	private void calcBorneInférieure() {
-		// TODO
+		if(valeurListe() > ABR.borneInférieure)
+			ABR.borneInférieure = this.valeurListe();
+	}
+	
+	public void calcMeilleurListe(){
+		if (this.valeurListe() == ABR.borneInférieure) {
+			ABR.solution = this.value;
+		} else {
+			if (this.leftTree == null && this.rightTree == null) {
+				return;
+			}
+			if (this.leftTree == null) {
+				this.rightTree.calcMeilleurListe();
+			}
+			if (this.rightTree == null) {
+				this.leftTree.calcMeilleurListe();
+			}
+			if (this.rightTree != null && this.leftTree != null) {
+				this.rightTree.calcMeilleurListe();
+				this.leftTree.calcMeilleurListe();
+			}
+		}
+	}
+	
+	public static ArrayList<Item> getSolution() {
+		return new ArrayList<Item>(solution);
 	}
 
 	@Override
