@@ -9,6 +9,9 @@ public class Dynamique {
 	/**
 	 * @param sac : le sac à résoudre
 	 */
+	/**
+	 * @param sac
+	 */
 	public static void dynamiqueRes(SacADos sac) {
 		float multiplicateur = 10;
 
@@ -37,10 +40,8 @@ public class Dynamique {
 
 		int i = items.size() - 1;
 		int j = (int) (sac.getPoidsMaximal() * multiplicateur);
-		/*
-		 * On récupère dans la dernière ligne le poids minimal nécessaire pour faire le
-		 * bénéfice optimal
-		 */
+		// On récupère dans la dernière ligne le poids minimal nécessaire pour faire
+		// le bénéfice optimal
 		while (matrice[i][j] == matrice[i][j - 1])
 			--j;
 
@@ -48,7 +49,7 @@ public class Dynamique {
 		while (j > 0) {
 			while (i > 0 && matrice[i][j] == matrice[i - 1][j])
 				--i;
-			j = j - (int) (items.get(i).getPoids() * multiplicateur);
+			j -= (int) (items.get(i).getPoids() * multiplicateur);
 			if (j >= 0)
 				sac.addItemSac(items.get(i));
 			--i;

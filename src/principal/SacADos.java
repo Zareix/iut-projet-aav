@@ -131,10 +131,12 @@ public class SacADos {
 	@Override
 	public String toString() {
 		StringBuilder contenu = new StringBuilder();
+		contenu.append("[ ");
 		for (Item item : listeObjetsPossibles)
 			if (item.getStocké())
-				contenu.append(item.toString() + " | ");
-		contenu.deleteCharAt(contenu.lastIndexOf("|"));
+				contenu.append(item.toString() + ", ");
+		contenu.deleteCharAt(contenu.lastIndexOf(","));
+		contenu.append("]");
 
 		DecimalFormat df = new DecimalFormat("#.##"); // Permet de formater l'affichage des floats
 		return "Contenu du sac : " + contenu + System.lineSeparator() + "Poids du sac : " + df.format(poidsActuel())
